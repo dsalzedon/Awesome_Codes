@@ -1,8 +1,8 @@
-#Random codes
+# Random codes
 
 Collection of random codes to practice OOP or any cool code that I might have a interest to come back at it later.
 
-###Card_Wars   
+### Card_Wars   
 
 The name itself is pretty explanatory.
 Card wars is a card game where a deck of cards is given to 2 participants and whoever draw the stronger(greater) card wins.   
