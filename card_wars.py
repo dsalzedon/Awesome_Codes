@@ -3,6 +3,7 @@ from random import shuffle, choice
 
 
 def game():
+
     while True:
 
         player_1_card = choice(deck)
@@ -21,13 +22,11 @@ def game():
         elif p2_wins > 10:
             print("Finish, {} wins".format(p2))
             break
-        elif draws >9:
+        elif draws >10:
             print("No one wins")
-
         else:
             p1_value = check_char(p1_card[0])
             p2_value = check_char(p2_card[0])
-
             print(card_battle(p1_value, p2_value))
 
 
@@ -62,7 +61,9 @@ deck = [str(j) + " " + i for i,j in product(suits, values)]
 shuffle(deck)
 
 p1 = "Daniel"
+# p1 = input("Type yourname")
 p2 = "Ivan"
+# p2 = input("Type yourname")
 
 p1_wins = 0
 p2_wins = 0
@@ -71,11 +72,3 @@ draws = 0
 print("Welcome player1:\n{} \nWelcome player2:\n{}".format(p1, p2))
 
 game()
-
-
-
-
-
-
-
-
