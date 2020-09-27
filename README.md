@@ -7,7 +7,7 @@ Collection of random codes to practice OOP or any cool code that I might have an
 
 The name itself is pretty explanatory.
 Card wars is a card game where a deck of cards is given to 2 participants and whoever draw the stronger(greater) card wins.   
-For this exercise I use OOP as a way of practicing with it, but it was not necessary as the level of abstraction is not that high, nor inheritance or polymorfism is needed.
+For this exercise I use OOP as a way of practicing with it, but it was not necessary as the level of abstraction is not that high, nor inheritance or polymorphism is needed.
 
 I import the itertool **PRODUCT** to create a list containing all the possibilitties from the list "suits"(trebol,spades,diamonds,hearts) combined with the list "values"(2,3,-j,q,k). Also import **SHUFFLE** and **CHOICE** from the random module; Shuffe to desorganizes the list "deck" and choice to pseudo-random select an option from this list.
 
