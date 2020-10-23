@@ -11,14 +11,14 @@ def perceptron(inputs, outputs):
     while num_inputs < 4:
         print('---------- epochs {} ---------- '.format(epochs))
 
-        # se generan pesos aleatorios en el rango [-1,1]
+
         weights = np.array(np.random.uniform(-1, 1, inputs.shape))
         for input,weight, output in zip(inputs, weights, outputs):
 
-            # Realiza la suma ponderada de entradas con pesos
+
             y_generate = input@weight
 
-            # Función sigmoide
+
             y_generate = 0 if y_generate < 0 else 1
 
             if y_generate == output:
