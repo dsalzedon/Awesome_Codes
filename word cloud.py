@@ -23,10 +23,10 @@ wrds = get_wrds(path)
 words_frequency = {}
 
 for x in wrds:
-    if x not in words_frequency and x not in uninteresting_words:
-        words_frequency[x] = 1
-    else:
-        if x not in uninteresting_words:
+    if x not in uninteresting_words:
+        if x not in words_frequency:
+            words_frequency[x] = 1
+        else:
             words_frequency[x] += 1
 
 cloud = wordcloud.WordCloud()
