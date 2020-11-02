@@ -15,4 +15,11 @@ The game starts asking for the players' names, welcomes them and inmmediately st
 Then those values are pass to the function "card_battle" where are compared, if player one has a greater number it returns player 1 wins and the counter for player 1 is updated +1, otherwise player 2 wins and his counter is updated, if both cards has the same value is a draw.
 Whoever gathers 10 wins first, wins, but if 10 draws have happend it would stop the game.
 
----
+---   
+### Word Cloud   
+
+Word cloud is a picture with the most used words in a text, could be a conversation, book, webpage, etc.   
+The function **get_wrds** opens the file and goes through every character in each line to ignore punctuation marks; adding all the characters(even spaces) to a string and then returning this string as a list. Later, we iterate over this list to see the frequency of each word, before counting its frequency the word is matched to the list **uninteresting_words**, if there's a match that word won't be added. This is to leave words as "I", "am", "and", "to", "is", etc that are common use words in the english language and keeping the word cloud interesting.   
+Here's an example from the poem: The Raven
+![alt text](https://raw.githubusercontent.com/dsalzedon/Random/master/myfile.jpg)
+
