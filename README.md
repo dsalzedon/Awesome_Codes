@@ -20,6 +20,6 @@ Whoever gathers 10 wins first, wins, but if 10 draws have happend it would stop 
 
 Word cloud is a picture with the most used words in a text, could be a conversation, book, webpage, etc.   
 The function **get_wrds** opens the file and goes through every character in each line to ignore punctuation marks; adding all the characters(even spaces) to a string and then returning this string as a list. Later, we iterate over this list to see the frequency of each word, before counting its frequency the word is matched to the list **uninteresting_words**, if there's a match that word won't be added. This is to leave words as "I", "am", "and", "to", "is", etc that are common use words in the english language and keeping the word cloud interesting.   
-Here's an example from the poem: The Raven   
-![alt text](https://raw.githubusercontent.com/dsalzedon/Random/master/img/myfile.jpg)
+Here's an example from the poem: The Raven by Edgar Allan Poe   
+![alt text](https://raw.githubusercontent.com/dsalzedon/Random/master/img/theraven.jpg)
 
