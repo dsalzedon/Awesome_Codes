@@ -14,22 +14,29 @@ def get_wrds(path):
         return words.split()
 
 
-path = "theraven.txt"
-uninteresting_words = ["a", "the", "I", "if", "to", "and", "am", "was", "is", "are", "be"]    
+def get_freq(lst):
+    uninteresting_words = ["a", "the", "I", "if", "to", "and", "am", "was", "is", "are", "be", "i", "of", "that", "this"]
+    words_frequency = {}
 
-wrds = get_wrds(path)
+    for x in wrds:
+        if x.lower() not in uninteresting_words:
+            if x.lower() not in words_frequency:
+                words_frequency[x.lower()] = 1
+            else:
+                words_frequency[x.lower()] += 1
 
-words_frequency = {}
+    return words_frequency
 
-for x in wrds:
-    if x not in uninteresting_words:
-        if x not in words_frequency:
-            words_frequency[x] = 1
-        else:
-            words_frequency[x] += 1
 
-file_name = path.split(".txt")[0]
+text_path = "theraven.txt"
+font_path = "/System/Library/Fonts/HelveticaNeue.ttc"
 
-cloud = wordcloud.WordCloud(width=400, height=800, margin=5, font_step=5, contour_width=100)
+wrds = get_wrds(text_path)
+
+words_frequency = get_freq(wrds)
+
+file_name = text_path.split(".txt")[0]
+
+cloud = wordcloud.WordCloud(font_path=font_path, width=800, height=400, margin=5, font_step=5, contour_width=100, background_color='black', colormap="plasma")
 cloud.generate_from_frequencies(words_frequency)
-cloud.to_file(f"{file_name}.jpg")
+cloud.to_file(f"img/{file_name}.jpg")
