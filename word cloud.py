@@ -1,10 +1,6 @@
 import wordcloud
 
 
-path = "theraven.txt"
-uninteresting_words = ["a", "the", "I", "if", "to", "and", "am", "was", "is", "are", "be"]
-
-
 def get_wrds(path):
     words = ""
     with open(path, "r") as file:
@@ -18,6 +14,9 @@ def get_wrds(path):
         return words.split()
 
 
+path = "theraven.txt"
+uninteresting_words = ["a", "the", "I", "if", "to", "and", "am", "was", "is", "are", "be"]    
+
 wrds = get_wrds(path)
 
 words_frequency = {}
@@ -29,6 +28,8 @@ for x in wrds:
         else:
             words_frequency[x] += 1
 
-cloud = wordcloud.WordCloud()
+file_name = path.split(".txt")[0]
+
+cloud = wordcloud.WordCloud(width=400, height=800, margin=5, font_step=5, contour_width=100)
 cloud.generate_from_frequencies(words_frequency)
-cloud.to_file("myfile.jpg")
+cloud.to_file(f"{file_name}.jpg")
