@@ -1,6 +1,6 @@
-# Other Awesome codes
+# Other Awesome Codes
 
-Collection of random codes to practice OOP or any cool code that I might have an interest to come back at it later.
+Collection of codes to practice OOP or any cool code that I might have an interest to come back at it later.
 
 ---
 ### Card_Wars   
