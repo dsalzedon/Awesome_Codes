@@ -1,4 +1,4 @@
-# Random codes
+# Other Awesome codes
 
 Collection of random codes to practice OOP or any cool code that I might have an interest to come back at it later.
 
