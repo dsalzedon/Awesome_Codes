@@ -92,7 +92,7 @@ def get_sorted_recommendations(movie_lst):
 
     movies_posters = [get_movie_poster(movie) for movie in movie_recomendations]
 
-    # uncommet to get the list of movies order by rating
+    # uncomment to get the list of movies order by rating
     # movie_and_ratings= {movie: get_movie_rating(get_movie_data(movie)) for movie in movie_recomendations}
     # sorted_movies = [x for x in sorted(movie_and_ratings.keys(), key=lambda k: (movie_and_ratings[k], k), reverse=True)]
 
