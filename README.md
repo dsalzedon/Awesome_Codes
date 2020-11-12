@@ -5,7 +5,7 @@ Collection of codes to practice OOP or any cool code that I might have an intere
 ---   
 ### Movie Suggestions 
 
-Movie Suggestions is a firs step of a bigger project that gives you 6 movie suggestions order by Rotten Tomatoes ratings base on your input movie; could be a single movie or a list with multiple movies in it. It uses *PIL* to make the final poster with imgs taken from amazon's movie link and Tastedive API to get a list of suggestions and the OMDB API to get the ratings and the amazon movie img.
+Movie Suggestions is a firs step of a bigger project that gives you 6 movie suggestions order by Rotten Tomatoes ratings base on your input movie; could be a single movie or a list with multiple movies in it. It uses **PIL** to make the final poster with imgs taken from amazon's movie link and **Tastedive API** to get a list of suggestions and the **OMDB API** to get the ratings and the amazon movie img.
 
 Here's an example from the input "Batman Begins":     
 ![alt text](https://raw.githubusercontent.com/dsalzedon/Other_Awesome_Codes/master/img/movie_recomendations.jpg)   
