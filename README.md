@@ -1,24 +1,6 @@
-# Other Awesome Codes
+# Awesome Codes
 
 Collection of cool codes that I might have an interest to come back at it later.
-
----   
-### Movie Suggestions 
-
-Movie Suggestions is a firs step of a bigger project that gives you 6 movie suggestions order by Rotten Tomatoes ratings base on your input movie; could be a single movie or a list with multiple movies in it. It uses **PIL** to make the final poster with imgs taken from amazon's movie link and **Tastedive API** to get a list of suggestions and the **OMDB API** to get the ratings and the amazon movie img.
-
-Here's an example from the input "Batman Begins":     
-![alt text](https://raw.githubusercontent.com/dsalzedon/Other_Awesome_Codes/master/img/movie_recomendations.jpg)   
-
----   
-### Word Cloud   
-
-Word cloud is a picture with the most used words in a text, could be a conversation, book, webpage, etc.   
-The function **get_wrds** opens the file and goes through every character in each line to ignore punctuation marks; adding all the characters(even spaces) to a string and then returning this string as a list of words.   
-The function **get_freq**  iterate over the list of words given and if the word is not a **uninteresting_words** is add to a dictionary as a key and 1 as value; every time the loop matches that word will add +1 to the value(the count)
-
-Here's an example from the poem: The Raven by Edgar Allan Poe   
-![alt text](https://raw.githubusercontent.com/dsalzedon/Random/master/img/theraven.jpg)   
 
 ---
 
