@@ -1,5 +1,3 @@
-
-
 from pyfirmata2 import Arduino
 import time
 
@@ -32,6 +30,9 @@ class AnalogPrinter:
         self.board.analog[2].register_callback(self.myPrintCallback_3)
         self.board.samplingOn(1000 / self.samplingRate)
         self.board.analog[2].enable_reporting()
+
+        if self.luz == 1 and self.gas == 1 and self.flama == 1:
+            self.board.digital[5].write(1)
 
     def myPrintCallback(self, data):
         data1 = data * (5 / 1023) * 1000
