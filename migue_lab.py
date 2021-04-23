@@ -31,9 +31,6 @@ class AnalogPrinter:
         self.board.samplingOn(1000 / self.samplingRate)
         self.board.analog[2].enable_reporting()
 
-        if self.luz == 1 and self.gas == 1 and self.flama == 1:
-            self.board.digital[5].write(1)
-
     def myPrintCallback(self, data):
         data1 = data * (5 / 1023) * 1000
         self.timestamp += 1 / self.samplingRate
@@ -78,6 +75,9 @@ class AnalogPrinter:
             if self.luz == 1:
                 self.board.digital[4].write(1)
 
+            if self.luz == 1 and self.gas == 1 and self.flama == 1:
+                self.board.digital[5].write(1)
+
         else:
             print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es mayor al muestreo",)
             self.board.digital[4].write(1)
@@ -88,6 +88,7 @@ class AnalogPrinter:
 
             if self.flama == 1:
                 self.board.digital[3].write(1)
+            
 
     def stop(self):
         self.board.samplingOff()
