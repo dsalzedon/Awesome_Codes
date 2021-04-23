@@ -5,6 +5,7 @@ PORT = Arduino.AUTODETECT
 
 
 class AnalogPrinter:
+    
     def __init__(self):
         # sampling rate: 10Hz
         self.samplingRate = 10
@@ -88,6 +89,9 @@ class AnalogPrinter:
 
             if self.flama == 1:
                 self.board.digital[3].write(1)
+
+            if self.luz == 1 and self.gas == 1 and self.flama == 1:
+                self.board.digital[5].write(1)
             
 
     def stop(self):
