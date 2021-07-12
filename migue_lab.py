@@ -25,6 +25,7 @@ class AnalogPrinter:
         self.board.analog[1].register_callback(self.myPrintCallback_2)
         self.board.samplingOn(1000 / self.samplingRate)
         self.board.analog[1].enable_reporting()
+        self.pwm = board.get_pin('d:5:p')
 
     def start_luz(self):
         self.board = Arduino(PORT)
@@ -76,11 +77,10 @@ class AnalogPrinter:
                 self.start_servo()
 
     def start_servo(self):
-        board = Arduino(PORT)
-        pwm = board.get_pin('d:5:p')
-        pwm.write(1)
-        time.sleep(5)
-        pwm.write(0)
+        # pwm = board.get_pin('d:5:p')
+        self.pwm.write(1)
+        self.time.sleep(10)
+        self.pwm.write(0)
 
     def stop(self):
         self.board.samplingOff()
