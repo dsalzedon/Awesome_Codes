@@ -67,28 +67,10 @@ class AnalogPrinter:
             print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es menor al muestreo",)
             self.board.digital[4].write(0)
 
-            if self.gas == 1 :
-                self.board.digital[2].write(1)
-
-            if self.flama == 1:
-                self.board.digital[3].write(1)
-
-            if self.luz == 1:
-                self.board.digital[4].write(1)
-
-            if self.luz == 1 and self.gas == 1 and self.flama == 1:
-                self.board.digital[5].write(1)
-
         else:
             print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es mayor al muestreo",)
             self.board.digital[4].write(1)
             self.luz = 1
-
-            if self.gas == 1 :
-                self.board.digital[2].write(1)
-
-            if self.flama == 1:
-                self.board.digital[3].write(1)
 
             if self.luz == 1 and self.gas == 1 and self.flama == 1:
                 self.board.digital[5].write(1)
