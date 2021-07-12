@@ -73,19 +73,13 @@ class AnalogPrinter:
             self.board.digital[4].write(1)
             self.luz = 1
 
-    def start_servo(self):
-        self.board = Arduino(PORT)
-        self.pwm = self.board.get_pin('d:5:p')
-        self.pwm.write(1)
-        self.time.sleep(10)
-        self.pwm.write(0)
-
     def stop(self):
         self.board.samplingOff()
         self.board.exit()
 
 analogPrinter = AnalogPrinter()
 
+"""
 print("Let's print data from Arduino's analogue pins for 10secs.")
 
 #  START SENSOR GAS
@@ -106,11 +100,21 @@ analogPrinter.start_luz()
 time.sleep(10)
 analogPrinter.stop()
 print("Sensor de luminosidad terminado correctamente")
+"""
 
 # CORRER EL SERVO
 
+def start_servo(self):
+        board = Arduino(PORT)
+        pwm = board.get_pin('d:5:p')
+        pwm.write(1)
+        time.sleep(5)
+        board.exit()
+
+analogPrinter.luz, analogPrinter.gas, analogPrinter.flama = 1,1,1
+
 if analogPrinter.luz == 1 and analogPrinter.gas == 1 and analogPrinter.flama == 1:
     print('FUNCIONA')
-    analogPrinter.start_servo()
+    start_servo()
     analogPrinter.stop()
     print('yo soy la verga')
