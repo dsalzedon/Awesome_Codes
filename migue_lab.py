@@ -1,7 +1,7 @@
 from pyfirmata2 import Arduino
 import time
 
-PORT = Arduino.AUTODETECT
+PORT = "COM5"
 
 
 class AnalogPrinter:
@@ -73,8 +73,14 @@ class AnalogPrinter:
             self.luz = 1
 
             if self.luz == 1 and self.gas == 1 and self.flama == 1:
-                self.board.digital[5].write(1)
-            
+                self.start_servo()
+
+    def start_servo(self):
+        board = Arduino(PORT)
+        pwm = board.get_pin('d:5:p')
+        pwm.write(1)
+        time.sleep(5)
+        pwm.write(0)
 
     def stop(self):
         self.board.samplingOff()
