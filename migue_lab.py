@@ -25,10 +25,11 @@ class AnalogPrinter:
         self.board.analog[1].register_callback(self.myPrintCallback_2)
         self.board.samplingOn(1000 / self.samplingRate)
         self.board.analog[1].enable_reporting()
-        self.pwm = board.get_pin('d:5:p')
+        
 
     def start_luz(self):
         self.board = Arduino(PORT)
+        self.pwm = self.board.get_pin('d:5:p')
         self.board.analog[2].register_callback(self.myPrintCallback_3)
         self.board.samplingOn(1000 / self.samplingRate)
         self.board.analog[2].enable_reporting()
@@ -72,15 +73,17 @@ class AnalogPrinter:
             print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es mayor al muestreo",)
             self.board.digital[4].write(1)
             self.luz = 1
+            print(self.gas, self.flama, self.luz)
 
             if self.luz == 1 and self.gas == 1 and self.flama == 1:
+                print('FUNCIONA')
                 self.start_servo()
 
     def start_servo(self):
         # pwm = board.get_pin('d:5:p')
         self.pwm.write(1)
-        self.time.sleep(10)
-        self.pwm.write(0)
+        self.time.sleep(100)
+        # self.pwm.write(0)
 
     def stop(self):
         self.board.samplingOff()
