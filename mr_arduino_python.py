@@ -4,7 +4,7 @@ import time
 PORT = "COM5"
 
 class AnalogPrinter:
-    
+
     def __init__(self):
         # sampling rate: 10Hz
         self.samplingRate = 10
@@ -12,6 +12,9 @@ class AnalogPrinter:
         self.gas = 0
         self.flama = 0
         self.luz = 0
+        self.gas_array = []
+        self.flama_array = []
+        self.luz_array = []
 
     def start_gas(self):
         self.board = Arduino(PORT)
@@ -32,42 +35,51 @@ class AnalogPrinter:
         self.board.analog[2].enable_reporting()
 
     def sampling_gas(self, data):
-        data1 = data * (5 / 1023) * 1000
+        val_sensor_gas = data * (5 / 1023) * 1000
         self.timestamp += 1 / self.samplingRate
 
+        if self.gas_array <= 50:
+            self.gas_array.append(val_sensor_gas)
+
         if data1 <= 0.2:
-            print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es menor al muestreo",)
+            print(f"{round(self.timestamp, 2)}, {round(val_sensor_gas,2)} El valor del sensor es menor al muestreo",)
             self.board.digital[2].write(0)
 
         else:
-            print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es mayor al muestreo",)
+            print(f"{round(self.timestamp, 2)}, {round(val_sensor_gas,2)} El valor del sensor es mayor al muestreo",)
             self.board.digital[2].write(1)
             self.gas = 1
 
     def sampling_flama(self, data):
-        data1 = data * (5 / 1023) * 1000
+        val_sensor_flama = data * (5 / 1023) * 1000
         self.timestamp += 1 / self.samplingRate
 
+        if self.flama_array <= 50:
+            self.flama_array.append(val_sensor_flama)
+
         if data1 >= 2:
-            print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es mayor al muestreo",)
+            print(f"{round(self.timestamp, 2)}, {round(val_sensor_flama,2)} El valor del sensor es mayor al muestreo",)
             self.board.digital[3].write(0)
-            
+
 
         else:
-            print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es menor al muestreo",)
+            print(f"{round(self.timestamp, 2)}, {round(val_sensor_flama,2)} El valor del sensor es menor al muestreo",)
             self.board.digital[3].write(1)
             self.flama = 1
 
     def sampling_luz(self, data):
-        data1 = data * (5 / 1023) * 1000
+        val_sensor_luz = data * (5 / 1023) * 1000
         self.timestamp += 1 / self.samplingRate
 
+        if self.luz_array <= 50:
+            self.flama_array.append(luz_array)
+
         if data1 >= 1:
-            print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es mayor al muestreo",)
+            print(f"{round(self.timestamp, 2)}, {round(val_sensor_luz,2)} El valor del sensor es mayor al muestreo",)
             self.board.digital[4].write(0)
 
         else:
-            print(f"{round(self.timestamp, 2)}, {round(data1,2)} El valor del sensor es menor al muestreo",)
+            print(f"{round(self.timestamp, 2)}, {round(val_sensor_luz,2)} El valor del sensor es menor al muestreo",)
             self.board.digital[4].write(1)
             self.luz = 1
 
@@ -95,7 +107,7 @@ def main():
 def sensor_gas():
     print("Sensor de gas\n")
     analogPrinter.start_gas()
-    time.sleep(10)
+    time.sleep(5)
     analogPrinter.stop()
     print("Sensor de gas terminado correctamente")
     print(analogPrinter.gas, analogPrinter.flama, analogPrinter.luz, '\n')
@@ -105,7 +117,7 @@ def sensor_gas():
 def sensor_flama():
     print("Sensor de flama\n")
     analogPrinter.start_flama()
-    time.sleep(10)
+    time.sleep(5)
     analogPrinter.stop()
     print("Sensor de flama terminado correctamente")
     print(analogPrinter.gas, analogPrinter.flama, analogPrinter.luz, '\n')
@@ -115,7 +127,7 @@ def sensor_flama():
 def sensor_luz():
     print("Sensor de luz\n")
     analogPrinter.start_luz()
-    time.sleep(10)
+    time.sleep(5)
     analogPrinter.stop()
     print("Sensor de luminosidad terminado correctamente")
     print(analogPrinter.gas, analogPrinter.flama, analogPrinter.luz, '\n')
@@ -131,4 +143,5 @@ def servo():
 
 if __name__ == '__main__':
     analogPrinter = AnalogPrinter()
-    main()
+    sensor_gas()
+    print(analogPrinter.gas_array)
