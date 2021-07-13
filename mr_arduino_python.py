@@ -1,4 +1,5 @@
 from pyfirmata2 import Arduino
+import numpy as np
 import time
 
 PORT = "COM5"
@@ -39,7 +40,7 @@ class AnalogPrinter:
         self.timestamp += 1 / self.samplingRate
 
         if self.gas_array <= 50:
-            self.gas_array.append(val_sensor_gas)
+            self.gas_array.append(round(val_sensor_gas, 2))
 
         if data1 <= 0.2:
             print(f"{round(self.timestamp, 2)}, {round(val_sensor_gas,2)} El valor del sensor es menor al muestreo",)
@@ -54,13 +55,12 @@ class AnalogPrinter:
         val_sensor_flama = data * (5 / 1023) * 1000
         self.timestamp += 1 / self.samplingRate
 
-        if self.flama_array <= 50:
-            self.flama_array.append(val_sensor_flama)
+        if len(self.flama_array) <= 50:
+            self.flama_array.append(round(val_sensor_flama, 2))
 
         if data1 >= 2:
             print(f"{round(self.timestamp, 2)}, {round(val_sensor_flama,2)} El valor del sensor es mayor al muestreo",)
             self.board.digital[3].write(0)
-
 
         else:
             print(f"{round(self.timestamp, 2)}, {round(val_sensor_flama,2)} El valor del sensor es menor al muestreo",)
@@ -72,7 +72,7 @@ class AnalogPrinter:
         self.timestamp += 1 / self.samplingRate
 
         if self.luz_array <= 50:
-            self.flama_array.append(luz_array)
+            self.flama_array.append(round(luz_array, 2))
 
         if data1 >= 1:
             print(f"{round(self.timestamp, 2)}, {round(val_sensor_luz,2)} El valor del sensor es mayor al muestreo",)
@@ -100,7 +100,7 @@ def main():
     sensor_gas()
     sensor_flama()
     sensor_luz()
-    servo()
+    # servo()
 
 
 # START SENSOR GAS
@@ -135,13 +135,49 @@ def sensor_luz():
 
 # Correr Servo
 def servo():
-    if analogPrinter.luz == 1 and analogPrinter.gas == 1 and analogPrinter.flama == 1:
-        analogPrinter.start_servo()
-        analogPrinter.stop()
-        print('yo soy el mas perron aqui')
+    analogPrinter.start_servo()
+    analogPrinter.stop()
+    Aprint('yo soy el mas perron aqui')
+
+
+# Perceptron
+def perceptron(inputs, outputs):
+
+    inputs = np.array(inputs)
+    outputs = np.array(outputs)
+
+    epochs, num_inputs = 0, 0
+
+    while num_inputs < 4:
+        print('---------- epochs {} ---------- '.format(epochs))
+
+        weights = np.array(np.random.uniform(-1, 1, inputs.shape))
+
+        for input,weight, output in zip(inputs, weights, outputs):
+
+            y_generate = input@weight
+            y_generate = 0 if y_generate < 0 else 1
+
+            if y_generate == output:
+                num_inputs +=1
+            else:
+                num_inputs = 0
+
+            print('entrada: ', input, 'pesos:', weight, 'salida_esperada: ', output, 'salida_obtenida: ',y_generate)
+
+        epochs +=1
+
+    return True
+
 
 
 if __name__ == '__main__':
     analogPrinter = AnalogPrinter()
     sensor_gas()
-    print(analogPrinter.gas_array)
+
+    inputs = [[0,0,1],[analogPrinter.gas_array[-1],analogPrinter.flama_array[-1],analogPrinter.luz_array[-1]],[analogPrinter.gas_array[-5],analogPrinter.flama_array[-5],analogPrinter.luz_array[-5]],[1,1,1]]
+
+    outputs = [0,1,1,0]
+
+    if perceptron(inputs, outputs):
+        servo()
